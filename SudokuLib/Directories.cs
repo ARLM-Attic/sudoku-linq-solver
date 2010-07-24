@@ -21,6 +21,13 @@ namespace SudokuLib
         {
             get
             {
+                var di = new DirectoryInfo(new DirectoryInfo(System.Reflection.Assembly.GetAssembly(
+                    typeof(SudokuLib.SudokuSolutionNode)).Location).Parent.FullName + 
+                    Path.DirectorySeparatorChar + "Examples");
+
+                if (di.Exists)
+                    return di.FullName;
+
                 return new DirectoryInfo(System.Reflection.Assembly.GetAssembly(typeof(SudokuLib.SudokuSolutionNode)).Location).
                     Parent.Parent.Parent.Parent.CreateSubdirectory("SudokuLINQSolver").CreateSubdirectory("Examples").FullName;
             }

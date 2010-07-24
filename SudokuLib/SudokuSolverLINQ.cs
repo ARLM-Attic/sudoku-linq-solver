@@ -330,7 +330,8 @@ namespace SudokuLib
                              removed = (num1.Row == num2.Row) ? (from num in num1.RowNumbers().Except(num1.BoxNumbers())
                                                                  where (num.State == SudokuNumberState.sudokucellstatePossible) &&
                                                                        (num.Number == num1.Number)
-                                                                 select num).ToArray() :
+                                                                 select num).ToArray()
+                                                              :
                                                                 (from num in num1.ColNumbers().Except(num1.BoxNumbers())
                                                                  where (num.State == SudokuNumberState.sudokucellstatePossible) &&
                                                                        (num.Number == num1.Number)
