@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51AF54DC-A91B-493B-B0B8-8B135F3BB0DB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SudokuLINQSolver</RootNamespace>
+    <AssemblyName>SudokuLINQSolver</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>SudokuLINQSolver.Program</StartupObject>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\BaseSudokuAction.cs" />
+    <Compile Include="Actions\CellClearAction.cs" />
+    <Compile Include="Actions\CellNumberEnteredAction.cs" />
+    <Compile Include="Actions\NumberChangedAction.cs" />
+    <Compile Include="Actions\RotateAction.cs" />
+    <Compile Include="Actions\EditAction.cs" />
+    <Compile Include="Actions\RestartAction.cs" />
+    <Compile Include="Actions\SolveAction.cs" />
+    <Compile Include="Actions\StepAction.cs" />
+    <Compile Include="Colors.cs" />
+    <Compile Include="Configurations\Config.cs" />
+    <Compile Include="Configurations\Options.cs" />
+    <Compile Include="Configurations\PageSettings.cs" />
+    <Compile Include="Configurations\SplitterStates.cs" />
+    <Compile Include="Configurations\FormState.cs" />
+    <Compile Include="Configurations\LastOpenFiles.cs" />
+    <Compile Include="FileUtils.cs" />
+    <Compile Include="SolutionsCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SolutionsCheckedListBox.Designer.cs">
+      <DependentUpon>SolutionsCheckedListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InputGrid.Designer.cs">
+      <DependentUpon>InputGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionsTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SolutionsTree.Designer.cs">
+      <DependentUpon>SolutionsTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionsTreeState.cs" />
+    <Compile Include="SudokuSolverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SudokuSolverForm.Designer.cs">
+      <DependentUpon>SudokuSolverForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationButtonControler.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationControler.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationControlers.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationToolStripDropDownItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationToolStripItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationToolStripMenuItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\NavigationToolStripSplitButtonControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoButtonControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoControlers.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoToolStripDropDownItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoToolStripItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoToolStripMenuItemControler.cs" />
+    <Compile Include="UndoRedo\Controlers\UndoRedoToolStripSplitButtonControler.cs" />
+    <Compile Include="UndoRedo\NavigationManager.cs" />
+    <Compile Include="UndoRedo\NavigationManagerPart.cs" />
+    <Compile Include="UndoRedo\NavigationState.cs" />
+    <Compile Include="UndoRedo\NavigationStatePart.cs" />
+    <Compile Include="UndoRedo\TypeExtensions.cs" />
+    <Compile Include="UndoRedo\UndoRedoAction.cs" />
+    <Compile Include="UndoRedo\UndoRedoConfiguration.cs" />
+    <Compile Include="UndoRedo\UndoRedoDelegateAction.cs" />
+    <Compile Include="UndoRedo\UndoRedoManager.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SudokuSolverForm.resx">
+      <DependentUpon>SudokuSolverForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SolverGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SolverGrid.Designer.cs">
+      <DependentUpon>SolverGrid.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.VisualBasic.PowerPacks.10.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Visual Basic PowerPacks 10.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SudokuLib\SudokuLib.csproj">
+      <Project>{C74578B5-B68B-46CC-9B26-5A99CAF1B3EC}</Project>
+      <Name>SudokuLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editToolStripButton.Image.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
