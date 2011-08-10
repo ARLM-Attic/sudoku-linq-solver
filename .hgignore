@@ -19,3 +19,6 @@ SudokuLINQSolver.sln.docstates.suo
 SudokuLINQSolver/SudokuLINQSolver.csproj.vs10x
 SudokuLib/SudokuLib.csproj.vs10x
 SudokuTest/SudokuTest.csproj.vs10x
+TomanuExtensionsLib/bin
+TomanuExtensionsLib/obj
+TomanuExtensionsLib/TomanuExtensionsLib.csproj.vs10x
