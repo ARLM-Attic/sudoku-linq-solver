@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SudokuLib;
 using SudokuLINQSolver.Actions;
 using UndoRedoLib;
+using TomanuExtensions;
 
 namespace SudokuLINQSolver
 {

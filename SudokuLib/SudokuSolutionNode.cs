@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
+using TomanuExtensions;
 
 namespace SudokuLib
 {

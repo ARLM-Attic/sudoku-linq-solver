@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Drawing;
 using System.Collections;
+using TomanuExtensions;
 
 namespace SudokuLib
 {

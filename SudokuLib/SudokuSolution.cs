@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using System.Drawing;
 using System.Globalization;
+using TomanuExtensions;
 
 namespace SudokuLib
 {

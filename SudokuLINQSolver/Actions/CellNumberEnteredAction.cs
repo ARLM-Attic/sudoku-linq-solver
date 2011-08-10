@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UndoRedoLib;
 using SudokuLib;
+using TomanuExtensions;
 
 namespace SudokuLINQSolver.Actions
 {

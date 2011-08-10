@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Xml;
+using TomanuExtensions;
 
 namespace SudokuLib
 {

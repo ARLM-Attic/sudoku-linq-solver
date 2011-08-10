@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using SudokuLib;
 using System.Threading.Tasks;
+using TomanuExtensions;
 
 namespace SudokuGenerator
 {

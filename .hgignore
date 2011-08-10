@@ -1,0 +1,21 @@
+syntax: glob
+.svn
+SpeedTest/bin
+SpeedTest/obj
+SudokuGenerator/bin
+SudokuGenerator/obj
+SudokuLINQSolver.suo
+SudokuLINQSolver/bin
+SudokuLINQSolver/obj
+SudokuLib/bin
+SudokuLib/obj
+SudokuTest/bin
+SudokuTest/obj
+TestResults
+SudokuLINQSolver/SudokuLINQSolver.csproj.user
+SpeedTest/SpeedTest.csproj.vs10x
+SudokuGenerator/SudokuGenerator.csproj.vs10x
+SudokuLINQSolver.sln.docstates.suo
+SudokuLINQSolver/SudokuLINQSolver.csproj.vs10x
+SudokuLib/SudokuLib.csproj.vs10x
+SudokuTest/SudokuTest.csproj.vs10x

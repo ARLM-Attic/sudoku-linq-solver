@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using SudokuLib;
 using System.IO;
 using System.Diagnostics;
+using TomanuExtensions;
 
 namespace SudokuLINQSolver.Configurations
 {

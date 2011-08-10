@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using System.Threading;
 using SudokuLINQSolver.Configurations;
+using TomanuExtensions;
 
 namespace SudokuTest
 {
