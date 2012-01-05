@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TomanuExtensions.TestUtils;
 
 namespace SudokuTest
 {
-    public class ProgressIndicator
+    public class ProgressIndicator1
     {
         private Thread m_thread;
-        private ProgressForm m_form = new ProgressForm();
+        private ProgressForm1 m_form = new ProgressForm1();
 
-        public ProgressIndicator()
+        public ProgressIndicator1()
         {
             AutoResetEvent are = new AutoResetEvent(false);
 

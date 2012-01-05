@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using SudokuLINQSolver.Configurations;
 using TomanuExtensions;
+using TomanuExtensions.TestUtils;
 
 namespace SudokuTest
 {
@@ -40,8 +41,7 @@ namespace SudokuTest
         [TestMethod]
         public void Test_Solutions_Unique()
         {
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files = new DirectoryInfo(Directories.Solutions).GetFiles(FileExtensions.XmlZipMask);
 
@@ -121,7 +121,7 @@ namespace SudokuTest
                     }
 
                     counter.Increment();
-                    pi.Progress = counter.Value * 100 / count;
+                    pi.AddLine((counter.Value * 100 / count).ToString());
                 }
             });
 
@@ -140,8 +140,7 @@ namespace SudokuTest
             SudokuOptions.Current.ShowAllSolutions = false;
             SudokuOptions.Current.IncludeBoxes = true;
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files = new DirectoryInfo(Directories.Solutions).GetFiles(FileExtensions.XmlZipMask);
 
@@ -164,10 +163,11 @@ namespace SudokuTest
 
             Parallel.ForEach(solutions_gr, (solution_gr) =>
             {
-                pi.Progress = solutions_gr.IndexOf(solution_gr) * 100 / solutions_gr.Count();
+                pi.AddLine((solutions_gr.IndexOf(solution_gr) * 100 / solutions_gr.Count()).ToString());
 
-                if (new[] { SudokuSolutionType.XWing, SudokuSolutionType.JellyFish, SudokuSolutionType.SwordFish }.Contains(
-                    solution_gr.First().intermediate_solution.Solution.Type))
+                if (new[] { SudokuSolutionType.XWing, SudokuSolutionType.JellyFish, 
+                    SudokuSolutionType.SwordFish }.Contains(
+                        solution_gr.First().intermediate_solution.Solution.Type))
                 {
                     if (solution_gr.Count() < 20)
                         bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type + " - less then 20");
@@ -181,16 +181,25 @@ namespace SudokuTest
                                    select obj.intermediate_solution.Solution).ToList();
                         int c1 = SudokuSolutionNode.FilterByOptions(gr1).Count();
                         if (c1 == 0)
-                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type + " - solutions from 1 to 10 doesn't contains any boxes");
+                        {
+                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type +
+                                " - solutions from 1 to 10 doesn't contains any boxes");
+                        }
                         if (c1 == 10)
-                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type + " - solutions from 1 to 10 all contains boxes");
+                        {
+                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type +
+                                " - solutions from 1 to 10 all contains boxes");
+                        }
 
                         SudokuOptions.Current.IncludeBoxes = false;
                         var gr2 = (from obj in solution_gr.Skip(10).Take(10)
                                    select obj.intermediate_solution.Solution).ToList();
                         int c2 = SudokuSolutionNode.FilterByOptions(gr2).Count();
                         if (c2 != 10)
-                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type + " - solutions from 11 to 20 some contains boxes");
+                        {
+                            bad_quantities.Add(solution_gr.First().intermediate_solution.Solution.Type +
+                                " - solutions from 11 to 20 some contains boxes");
+                        }
                     }
                 }
                 else
@@ -216,10 +225,10 @@ namespace SudokuTest
         public void Test_Examples_Unique()
         {
             FileInfo[] files1 = new DirectoryInfo(Directories.Examples).GetFiles(FileExtensions.XmlZipMask);
-            FileInfo[] files2 = new DirectoryInfo(Directories.Examples + Path.DirectorySeparatorChar + "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
+            FileInfo[] files2 = new DirectoryInfo(Directories.Examples + Path.DirectorySeparatorChar + 
+                "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             var examples1 = from file in files1.Concat(files2).AsParallel()
                             select new
@@ -265,7 +274,7 @@ namespace SudokuTest
             Parallel.ForEach(examples2, (example1) =>
             {
                 counter.Increment();
-                pi.Progress = counter.Value* 100 / examples2.Length;
+                pi.AddLine((counter.Value * 100 / examples2.Length).ToString());
 
                 foreach (var example2 in examples2.Except(example1))
                 {
@@ -340,8 +349,7 @@ namespace SudokuTest
 
             FileInfo[] files = new DirectoryInfo(Directories.Solutions).GetFiles(FileExtensions.XmlZipMask);
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             var solutions1 = (from file in files.AsParallel()
                               select new
@@ -396,7 +404,7 @@ namespace SudokuTest
 
                 counter.Increment();
 
-                pi.Progress = counter.Value * 100 / count;
+                pi.AddLine((counter.Value * 100 / count).ToString());
             });
 
             if (unsolvable.Count > 0)
@@ -411,8 +419,7 @@ namespace SudokuTest
         [TestMethod()]
         public void Test_Solution_Tress_Verificator()
         {
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files = new DirectoryInfo(Directories.SolutionTrees).GetFiles(FileExtensions.XmlZipMask);
 
@@ -427,7 +434,7 @@ namespace SudokuTest
             Parallel.ForEach(files, (file) =>
             {
                 counter.Increment();
-                pi.Progress = counter.Value * 100 / files.Length;
+                pi.AddLine((counter.Value * 100 / files.Length).ToString());
 
                 SudokuSolutionNode node = SudokuSolutionNode.LoadFromFile(file.FullName);
 
@@ -445,7 +452,8 @@ namespace SudokuTest
                             {
                                 ok = false;
 
-                                string diff_file = String.Format("{0}{1}{2}_index_{3}_sol_type_{4}_coords_{5}_number_{6}{7}",
+                                string diff_file = String.Format(
+                                    "{0}{1}{2}_index_{3}_sol_type_{4}_coords_{5}_number_{6}{7}",
                                     dir_diff,
                                     Path.DirectorySeparatorChar,
                                     Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(file.FullName)),
@@ -454,7 +462,9 @@ namespace SudokuTest
                                     number.Coords,
                                     number.Number,
                                     FileExtensions.XmlZipExt);
-                                new SudokuIntermediateSolution(n.Parent.Board, n.Board, n.Solution).SaveToFile(diff_file);
+
+                                new SudokuIntermediateSolution(n.Parent.Board, n.Board, 
+                                    n.Solution).SaveToFile(diff_file);
 
                                 index++;
                             }
@@ -469,7 +479,8 @@ namespace SudokuTest
         [TestMethod()]
         public void Test_Unsolvable()
         {
-            FileInfo[] files = new DirectoryInfo(Directories.TestExamples + Path.DirectorySeparatorChar + "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
+            FileInfo[] files = new DirectoryInfo(Directories.TestExamples + Path.DirectorySeparatorChar +
+                "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
 
             foreach (FileInfo file in files)
             {
@@ -489,10 +500,10 @@ namespace SudokuTest
             SudokuOptions.Current.ShowAllSolutions = false;
             SudokuOptions.Current.IncludeBoxes = true;
 
-            FileInfo[] files = new DirectoryInfo(Directories.Examples + Path.DirectorySeparatorChar + "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
+            FileInfo[] files = new DirectoryInfo(Directories.Examples + 
+                Path.DirectorySeparatorChar + "Unsolvable").GetFiles(FileExtensions.XmlZipMask);
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             ConcurrentBag<string> solvable = new ConcurrentBag<string>();
 
@@ -501,7 +512,7 @@ namespace SudokuTest
             Parallel.ForEach(files, (file) =>
             {
                 counter.Increment();
-                pi.Progress = counter.Value * 100 / files.Length;
+                pi.AddLine((counter.Value * 100 / files.Length).ToString());
 
                 SudokuBoard board = SudokuBoard.LoadFromFile(file.FullName);
                 Assert.IsNotNull(board, file.FullName);
@@ -525,8 +536,7 @@ namespace SudokuTest
         [TestMethod()]
         public void Test_Solution_Trees_vs_Examples()
         {
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files1 = new DirectoryInfo(Directories.Examples).GetFiles(FileExtensions.XmlZipMask);
             FileInfo[] files2 = new DirectoryInfo(Directories.SolutionTrees).GetFiles(FileExtensions.XmlZipMask);
@@ -540,7 +550,8 @@ namespace SudokuTest
                             select file2).ToArray();
 
             if (not_all.Count() > 0)
-                Assert.Fail("Is in 'Examples', but not in 'SolutionTrees' (run project 'SudokuGenerator'): " + not_all.First().FullName);
+                Assert.Fail("Is in 'Examples', but not in 'SolutionTrees' (run project 'SudokuGenerator'): " +
+                    not_all.First().FullName);
 
             if (too_much.Count() > 0)
                 Assert.Fail("Is in 'SolutionTrees', but not in 'Examples': " + too_much.First().FullName);
@@ -548,10 +559,12 @@ namespace SudokuTest
             string dir3 = Directories.SolutionTrees + Path.DirectorySeparatorChar + "Diffrencies";
             new DirectoryInfo(dir3).CreateOrEmpty();
 
-            string dir4 = Directories.SolutionTrees + Path.DirectorySeparatorChar + "Diffrencies" + Path.DirectorySeparatorChar + "Added";
+            string dir4 = Directories.SolutionTrees + Path.DirectorySeparatorChar + "Diffrencies" + 
+                Path.DirectorySeparatorChar + "Added";
             new DirectoryInfo(dir4).CreateOrEmpty();
 
-            string dir5 = Directories.SolutionTrees + Path.DirectorySeparatorChar + "Diffrencies" + Path.DirectorySeparatorChar + "Removed";
+            string dir5 = Directories.SolutionTrees + Path.DirectorySeparatorChar + "Diffrencies" + 
+                Path.DirectorySeparatorChar + "Removed";
             new DirectoryInfo(dir5).CreateOrEmpty();
 
             bool b = false;
@@ -563,11 +576,12 @@ namespace SudokuTest
             Parallel.ForEach(files2, (file2, state) =>
             {
                 counter.Increment();
-                pi.Progress = counter.Value * 100 / files2.Length;
+                pi.AddLine((counter.Value * 100 / files2.Length).ToString());
 
                 SudokuSolutionNode node2 = SudokuSolutionNode.LoadFromFile(file2.FullName);
 
-                SudokuBoard board = SudokuBoard.LoadFromFile(files1.First(f => f.Name == Directories.ConvertName(file2.FullName)).FullName);
+                SudokuBoard board = SudokuBoard.LoadFromFile(files1.First(f => f.Name == 
+                    Directories.ConvertName(file2.FullName)).FullName);
 
                 board = board.Rotate(ExtractRotateNumber(file2.Name));
 
@@ -635,9 +649,11 @@ namespace SudokuTest
                 {
                     if (added.Solution != null)
                     {
-                        string dir = a_fileInfo.DirectoryName + Path.DirectorySeparatorChar + "Diffrencies" + Path.DirectorySeparatorChar + "Added";
+                        string dir = a_fileInfo.DirectoryName + Path.DirectorySeparatorChar + "Diffrencies" + 
+                            Path.DirectorySeparatorChar + "Added";
 
-                        SudokuIntermediateSolution intermediate_solution = new SudokuIntermediateSolution(added.Board, added.NextBoard, added.Solution);
+                        SudokuIntermediateSolution intermediate_solution = 
+                            new SudokuIntermediateSolution(added.Board, added.NextBoard, added.Solution);
 
                         intermediate_solution.SaveToFile(dir + Path.DirectorySeparatorChar +
                             Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(a_fileInfo.FullName)) +
@@ -659,16 +675,20 @@ namespace SudokuTest
                 {
                     if (removed.Solution != null)
                     {
-                        string dir = a_fileInfo.DirectoryName + Path.DirectorySeparatorChar + "Diffrencies" + Path.DirectorySeparatorChar + "Removed";
+                        string dir = a_fileInfo.DirectoryName + Path.DirectorySeparatorChar + 
+                            "Diffrencies" + Path.DirectorySeparatorChar + "Removed";
 
-                        SudokuIntermediateSolution intermediate_solution = new SudokuIntermediateSolution(removed.Board, removed.NextBoard, removed.Solution);
+                        SudokuIntermediateSolution intermediate_solution = 
+                            new SudokuIntermediateSolution(removed.Board, removed.NextBoard, removed.Solution);
 
                         intermediate_solution.SaveToFile(dir + Path.DirectorySeparatorChar +
                             Path.GetFileNameWithoutExtension(Path.DirectorySeparatorChar +
-                            Path.GetFileNameWithoutExtension(a_fileInfo.FullName)) + "_removed_" + remove_counter + FileExtensions.XmlZipExt);
+                            Path.GetFileNameWithoutExtension(a_fileInfo.FullName)) + "_removed_" + 
+                            remove_counter + FileExtensions.XmlZipExt);
 
-                        a_list.Add(Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(a_fileInfo.FullName)) +
-                            "_removed_" + remove_counter + ": " + intermediate_solution.Solution.ToString());
+                        a_list.Add(Path.GetFileNameWithoutExtension(
+                            Path.GetFileNameWithoutExtension(a_fileInfo.FullName)) + "_removed_" + 
+                            remove_counter + ": " + intermediate_solution.Solution.ToString());
 
                         remove_counter++;
 
@@ -678,7 +698,8 @@ namespace SudokuTest
             }
 
             var node_next = ((a_node != null) && a_node.Nodes.Any()) ? a_node.Nodes.First() : null;
-            var expected_next = ((a_expected_node != null) && a_expected_node.Nodes.Any()) ? a_expected_node.Nodes.First() : null;
+            var expected_next = ((a_expected_node != null) && a_expected_node.Nodes.Any()) ? 
+                a_expected_node.Nodes.First() : null;
 
             if ((node_next == null) || (expected_next == null))
                 return b1;
@@ -721,7 +742,8 @@ namespace SudokuTest
             return b1 | b2;
         }
 
-        private IEnumerable<SudokuSolutionNode> RemoveIfExistsElsewhere(IEnumerable<SudokuSolutionNode> a_enum, SudokuSolutionNode a_node)
+        private IEnumerable<SudokuSolutionNode> RemoveIfExistsElsewhere(IEnumerable<SudokuSolutionNode> a_enum, 
+            SudokuSolutionNode a_node)
         {
             List<SudokuSolutionNode> list = new List<SudokuSolutionNode>(a_enum);
 
@@ -749,8 +771,7 @@ namespace SudokuTest
             SudokuOptions.Current.ShowAllSolutions = false;
             SudokuOptions.Current.IncludeBoxes = true;
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files = new DirectoryInfo(Directories.Examples).GetFiles(FileExtensions.XmlZipMask);
 
@@ -764,7 +785,7 @@ namespace SudokuTest
                 Assert.IsNotNull(board, file.FullName);
 
                 counter.Increment();
-                pi.Progress = counter.Value * 100 / files.Length;
+                pi.AddLine((counter.Value * 100 / files.Length).ToString());
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -792,8 +813,7 @@ namespace SudokuTest
         {
             SudokuOptions.Current.ShowAllSolutions = false;
 
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             FileInfo[] files = new DirectoryInfo(Directories.SolutionTrees).GetFiles(FileExtensions.XmlZipMask);
 
@@ -806,7 +826,7 @@ namespace SudokuTest
             Parallel.ForEach(files, (file) => 
             {
                 counter.Increment();
-                pi.Progress = counter.Value * 100 / files.Length;
+                pi.AddLine((counter.Value * 100 / files.Length).ToString());
 
                 SudokuSolutionNode root = SudokuSolutionNode.LoadFromFile(file.FullName);
 
@@ -862,13 +882,15 @@ namespace SudokuTest
 
                     foreach (var pair in new_includes)
                     {
-                        SudokuIntermediateSolution intermediate_solution_1 = new SudokuIntermediateSolution(pair.n1.Board, pair.n1.NextBoard, pair.n1.Solution);
+                        SudokuIntermediateSolution intermediate_solution_1 = 
+                            new SudokuIntermediateSolution(pair.n1.Board, pair.n1.NextBoard, pair.n1.Solution);
 
                         intermediate_solution_1.SaveToFile(dir + Path.DirectorySeparatorChar + index + "_" +
                             Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(file.FullName)) + "_" +
                             pair.n1.Solution.Type + FileExtensions.XmlZipExt);
 
-                        SudokuIntermediateSolution intermediate_solution_2 = new SudokuIntermediateSolution(pair.n2.Board, pair.n2.NextBoard, pair.n2.Solution);
+                        SudokuIntermediateSolution intermediate_solution_2 = 
+                            new SudokuIntermediateSolution(pair.n2.Board, pair.n2.NextBoard, pair.n2.Solution);
 
                         intermediate_solution_2.SaveToFile(dir + Path.DirectorySeparatorChar + index + "_" +
                             Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(file.FullName)) + "_" +
@@ -885,8 +907,7 @@ namespace SudokuTest
         [TestMethod()]
         public void Test_Progress_Indicator_1()
         {
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            ProgressIndicator pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             int counter = 0;
 
@@ -894,36 +915,11 @@ namespace SudokuTest
             {
                 if (pi.IsDisposed)
                 {
-                    pi = new ProgressIndicator();
-                    pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                    pi = new ProgressIndicator(System.Reflection.MethodBase.GetCurrentMethod().Name);
                 }
 
-                pi.Progress = counter % 99;
+                pi.AddLine((counter % 99).ToString());
                 Thread.Sleep(10);
-                counter++;
-            }
-        }
-
-        [TestMethod()]
-        public void Test_Progress_Indicator_2()
-        {
-            ProgressIndicator pi = new ProgressIndicator();
-            pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-
-            int counter = 0;
-
-            for (; ; )
-            {
-                if (pi.IsDisposed)
-                {
-                    pi = new ProgressIndicator();
-                    pi.TestName = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                }
-
-                int c = pi.Progress;
-                pi.Progress = counter % 99;
-                Thread.Sleep(10);
-                counter = pi.Progress + c;
                 counter++;
             }
         }

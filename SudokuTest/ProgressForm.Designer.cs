@@ -1,6 +1,6 @@
 ﻿namespace SudokuTest
 {
-    partial class ProgressForm
+    partial class ProgressForm1
     {
         /// <summary>
         /// Required designer variable.

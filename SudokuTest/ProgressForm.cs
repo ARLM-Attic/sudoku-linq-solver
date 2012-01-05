@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace SudokuTest
 {
-    public partial class ProgressForm : Form
+    public partial class ProgressForm1 : Form
     {
         private string m_testName;
 
-        public ProgressForm()
+        public ProgressForm1()
         {
             InitializeComponent();
         }
