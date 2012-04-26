@@ -11,13 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuLINQSolver", "SudokuL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuGenerator", "SudokuGenerator\SudokuGenerator.csproj", "{E08E1626-0B45-49AD-AD9C-C4DD651AD2DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomanuExtensionsLib", "TomanuExtensions\TomanuExtensionsLib\TomanuExtensionsLib.csproj", "{4653B49E-D5A5-43B7-8CED-160E7BC09917}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomanuExtensionsLib", "TomanuExtensionsLib\TomanuExtensionsLib.csproj", "{4653B49E-D5A5-43B7-8CED-160E7BC09917}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -108,5 +104,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

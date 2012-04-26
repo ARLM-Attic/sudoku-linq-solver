@@ -118,7 +118,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TomanuExtensions\TomanuExtensionsLib\TomanuExtensionsLib.csproj">
+    <ProjectReference Include="..\TomanuExtensionsLib\TomanuExtensionsLib.csproj">
       <Project>{4653B49E-D5A5-43B7-8CED-160E7BC09917}</Project>
       <Name>TomanuExtensionsLib</Name>
     </ProjectReference>
