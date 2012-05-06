@@ -73,16 +73,13 @@
     <Compile Include="Comparators.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="Directories.cs" />
-    <Compile Include="DirectoryInfoExtensions.cs" />
     <Compile Include="FileExtensions.cs" />
     <Compile Include="ParallelEx.cs" />
     <Compile Include="RotateExtensions.cs" />
     <Compile Include="SudokuSolutionColorUnits.cs" />
     <Compile Include="SudokuOptions.cs" />
     <Compile Include="SudokuSolutionNodeStepMode.cs" />
-    <Compile Include="IListExtensions.cs" />
     <Compile Include="SudokuSolutionType.cs" />
-    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SudokuSolution.cs" />
     <Compile Include="SudokuCell.cs" />
